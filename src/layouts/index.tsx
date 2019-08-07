@@ -1,19 +1,20 @@
 import React from 'react';
 import styles from './index.css';
 import { Layout, Menu, Icon } from 'antd';
-
+import Link from 'umi/link';
 const { Header, Sider, Content } = Layout;
 
 const BasicLayout: React.FC = props => {
-  console.log(props);
+  // console.log(props);
   return (
     <Layout style={{ height: '100%' }}>
-      <Sider trigger={null} collapsible>
+      <Sider trigger={null} collapsible={true}>
         <div className="logo" />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
           <Menu.Item key="1">
             <Icon type="user" />
             <span>nav 1</span>
+            <Link to="/users" />
           </Menu.Item>
           <Menu.Item key="2">
             <Icon type="video-camera" />
@@ -26,21 +27,8 @@ const BasicLayout: React.FC = props => {
         </Menu>
       </Sider>
       <Layout>
-        <Header style={{ background: '#fff', padding: 0 }}>
-          {/* <Icon
-            className="trigger"
-            type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-            onClick={this.toggle}
-          /> */}
-        </Header>
-        <Content
-          style={{
-            margin: '24px 16px',
-            padding: 24,
-            background: '#fff',
-            minHeight: 280,
-          }}
-        >
+        <Header />
+        <Content>
           {props.children}
         </Content>
       </Layout>
