@@ -2,7 +2,9 @@ import React from 'react';
 import styles from './index.less';
 import { Layout, Menu, Icon } from 'antd';
 import Link from 'umi/link';
+import { LeftNav } from '../const/letfNav';
 const { Header, Sider, Content } = Layout;
+import { formatMessage } from 'umi-plugin-locale';
 
 const BasicLayout: React.FC = props => {
   // console.log(props);
@@ -10,25 +12,12 @@ const BasicLayout: React.FC = props => {
     <Layout style={{ height: '100%' }}>
       <Header className={styles.header} />
       <Layout>
-        <Sider collapsible >
+        <Sider collapsible={false} collapsed={true} >
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1">
-              <Icon type="user" />
-              <span>nav 1</span>
-              <Link to="/users" />
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="video-camera" />
-              <span>nav 2</span>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Icon type="upload" />
-              <span>nav 3</span>
-            </Menu.Item>
+            {LeftNav.map(item => createMenuItem(item))}
           </Menu>
         </Sider>
-
         <Content className={styles.content}>
           {props.children}
         </Content>
@@ -36,5 +25,15 @@ const BasicLayout: React.FC = props => {
     </Layout>
   );
 };
+
+function createMenuItem(item: any): React.ReactElement {
+  return (
+    <Menu.Item key={item.key}>
+      <Icon type="user" />
+      <span>{formatMessage({ id: item.name })}</span>
+      <Link to={item.link} />
+    </Menu.Item>
+  )
+}
 
 export default BasicLayout;
