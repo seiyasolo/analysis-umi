@@ -10,7 +10,7 @@ import LoginLayout from './login/login';
 const BasicLayout: React.FC = props => {
   if (!localStorage.getItem('TOKEN')) {
     return (
-      <LoginLayout {...props}></LoginLayout>
+      <LoginLayout {...props} />
     )
   }
   return (
