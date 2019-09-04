@@ -5,9 +5,14 @@ import Link from 'umi/link';
 import { LeftNav } from '../const/letfNav';
 const { Header, Sider, Content } = Layout;
 import { formatMessage } from 'umi-plugin-locale';
+import LoginLayout from './login/login';
 
 const BasicLayout: React.FC = props => {
-  // console.log(props);
+  if (!localStorage.getItem('TOKEN')) {
+    return (
+      <LoginLayout {...props}></LoginLayout>
+    )
+  }
   return (
     <Layout style={{ height: '100%' }}>
       <Header className={styles.header} />
