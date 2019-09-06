@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import styles from './index.less';
 import { Layout, Menu, Icon } from 'antd';
 import Link from 'umi/link';
@@ -7,8 +7,8 @@ const { Header, Sider, Content } = Layout;
 import { formatMessage } from 'umi-plugin-locale';
 import LoginLayout from './login/login';
 
-const BasicLayout: React.FC = props => {
-  if (!localStorage.getItem('TOKEN')) {
+const BasicLayout: React.FC = (props: PropsWithChildren<any>) => {
+  if (!localStorage.getItem('TOKEN') || props.location.pathname === '/login') {
     return (
       <LoginLayout {...props} />
     )

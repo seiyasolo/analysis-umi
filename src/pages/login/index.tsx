@@ -3,6 +3,8 @@ import styles from './index.less';
 import { formatMessage } from 'umi-plugin-locale';
 import { Input, DatePicker, Select, Form, Button, message } from 'antd';
 import { FormComponentProps } from "antd/lib/form/Form";
+import router from 'umi/router';
+
 const Option = Select.Option;
 const FormItem = Form.Item;
 const FormCreate = Form.create();
@@ -46,8 +48,10 @@ class Login extends Component<IFormComponentProps> {
         // console.log(getFieldsValue())
         validateFields((err, value) => {
             if (!err) {
-                if (value.username !== 'admin' && value.password !== '123') {
+                if (value.username !== 'admin' || value.password !== '123') {
                     message.error('用户名密码不正确！');
+                } else {
+                    router.push('./users')
                 }
             }
         })
